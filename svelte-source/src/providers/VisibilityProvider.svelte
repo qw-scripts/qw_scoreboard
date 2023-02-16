@@ -3,14 +3,19 @@
   import { useFetchNui } from "@hooks/useFetchNui";
   import { onMount } from "svelte";
   import { visibility } from "@store/visibility";
+  import type { IScoreboard } from "@interfaces/scoreboard"; 
+  import { scoreboard } from "@store/scoreboard";
 
   let isVisible: boolean;
   visibility.subscribe((visible) => {
     isVisible = visible;
   });
-  useNuiEvent<boolean>("setVisible", (visible) => {
-    visibility.set(visible);
+
+  useNuiEvent<{ isVisible: boolean; scoreboardData: IScoreboard }>("setVisible", (data) => {
+    visibility.set(data.isVisible);
+    scoreboard.set(data.scoreboardData);
   });
+
   onMount(() => {
     const keyHandler = (e: KeyboardEvent) => {
       if (isVisible && ["Escape"].includes(e.code)) {

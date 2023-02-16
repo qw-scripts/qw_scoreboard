@@ -10,12 +10,13 @@ author 'qw-scripts'
 lua54 'yes'
 
 shared_scripts {
-    '@qb-core/shared/locale.lua', 'locales/*.lua', 'shared/config.lua'
+    'shared/config.lua',
+    '@ox_lib/init.lua'
 }
 
 client_scripts {'client/*.lua'}
 
-server_scripts {'@oxmysql/lib/MySQL.lua', 'server/*.lua'}
+server_scripts {'server/*.lua'}
 
 ui_page 'html/index.html'
 
